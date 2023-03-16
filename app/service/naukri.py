@@ -2,9 +2,11 @@ import requests
 import json
 from config import naukri_cookies
 
-def fetch_naukri_job(number_of_result=100, search_keyword='', search_keyword_hyphen='', page_number=1):
+def fetch_naukri_job(number_of_result=100, search_keyword='', search_keyword_hyphen='', page_number=1, location=''):
 
-    url = f"https://www.naukri.com/jobapi/v3/search?noOfResults={number_of_result}&urlType=search_by_keyword&searchType=adv&keyword={search_keyword}&pageNo={page_number}&k={search_keyword}&seoKey={search_keyword_hyphen}-jobs&src=jobsearchDesk"
+    url = f"https://www.naukri.com/jobapi/v3/search?noOfResults={number_of_result}&l={location}&urlType=search_by_keyword&searchType=adv&location={location}&keyword={search_keyword}&pageNo={page_number}&k={search_keyword}&seoKey={search_keyword_hyphen}-jobs-in-{location}&src=jobsearchDesk"
+
+    print(url)
 
     headers = {
       'authority': 'www.naukri.com',
@@ -16,7 +18,7 @@ def fetch_naukri_job(number_of_result=100, search_keyword='', search_keyword_hyp
       'content-type': 'application/json',
       'cookie': naukri_cookies,
       'gid': 'LOCATION,INDUSTRY,EDUCATION,FAREA_ROLE',
-      'referer': f'https://www.naukri.com/{search_keyword_hyphen}-jobs?k={search_keyword}',
+      'referer': f'https://www.naukri.com/{search_keyword_hyphen}-jobs-{location}?k={search_keyword}&l={location}',
       'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Brave";v="110"',
       'sec-ch-ua-mobile': '?0',
       'sec-ch-ua-platform': '"macOS"',
@@ -29,9 +31,11 @@ def fetch_naukri_job(number_of_result=100, search_keyword='', search_keyword_hyp
     }
 
     response = requests.request("GET", url, headers=headers)
+
     if response.status_code != 200:
         print(response.text)
         return response.json()
+
     return [
         {
             'Title': i['title'],

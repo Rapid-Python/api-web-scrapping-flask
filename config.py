@@ -33,3 +33,5 @@ app.handle_http_exception = get_http_exception_handler(app)
 
 naukri_cookies = os.getenv('NAUKRI_COOKIES')
 
+debug_flag = os.getenv('DEBUG_FLAG')
+

@@ -12,7 +12,8 @@ def get_naukri():
     response_data = fetch_naukri_job(
         number_of_result=clean_request['number_of_result'],
         search_keyword=clean_request['search_keyword'],
-        search_keyword_hyphen=clean_request['search_keyword_hyphen']
+        search_keyword_hyphen=clean_request['search_keyword_hyphen'],
+        location=clean_request['location']
     )
 
     return clean_get_output_jobs(response_data)

@@ -5,7 +5,8 @@ def clean_get_input_naukri_jobs(request_data):
         'number_of_result': request_data.get('number_of_result', 100),
         'search_keyword': request_data.get('search_keyword', ''),
         'search_keyword_hyphen': request_data.get('search_keyword').replace(' ', '-'),
-        'page_number': request_data.get('page_number', 1)
+        'page_number': request_data.get('page_number', 1),
+        'location': request_data.get('location', '')
     }
 
 
