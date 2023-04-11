@@ -1,6 +1,7 @@
 from flask import jsonify
 
 def clean_get_input_naukri_jobs(request_data):
+
     return  {
         'number_of_result': request_data.get('number_of_result', 100),
         'search_keyword': request_data.get('search_keyword', ''),
